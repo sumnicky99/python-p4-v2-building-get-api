@@ -14,7 +14,7 @@ metadata = MetaData(
 db = SQLAlchemy(metadata=metadata)
 
 
-class Game(db.Model):
+class Game(db.Model, SerializerMixin):
     __tablename__ = "games"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -33,6 +33,8 @@ class Game(db.Model):
 
 class Review(db.Model):
     __tablename__ = "reviews"
+    
+    serialize_rules = ("-reviews.game",)
 
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer)
